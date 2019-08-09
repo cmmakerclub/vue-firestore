@@ -23,11 +23,21 @@ const addDocument = (data = {}) => {
     });
 };
 
+const deleteDocument = (id) => {
+  db.collection('TodoLists').doc(id).delete().then(() => {
+    console.log('Document successfully deleted!');
+  })
+    .catch((error) => {
+      console.error('Error removing document: ', error);
+    });
+};
+
 Vue.config.productionTip = false;
 
 new Vue({
   data: {
     addDocument,
+    deleteDocument,
     todoLists: [],
   },
   methods: {
