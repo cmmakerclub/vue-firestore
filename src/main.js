@@ -22,20 +22,31 @@ const addDocument = (data = {}) => {
     });
 };
 
-db.collection('TodoLists')
-  .onSnapshot((querySnapshot) => {
-    const todoLists = [];
-    querySnapshot.forEach((doc) => {
-      todoLists.push(doc.data());
-    });
-    console.log(todoLists);
-  });
-
 Vue.config.productionTip = false;
 
 new Vue({
   data: {
     addDocument,
+    todoLists: [],
+  },
+  methods: {
+    getData() {
+      db.collection('TodoLists')
+        .onSnapshot((querySnapshot) => {
+          this.todoLists = [];
+          querySnapshot.forEach((doc) => {
+            const data = {
+              ...doc.data(),
+              id: doc.id,
+            };
+            console.log(data);
+            this.todoLists.push(data);
+          });
+        });
+    },
+  },
+  mounted() {
+    this.getData();
   },
   router,
   render: h => h(App),
