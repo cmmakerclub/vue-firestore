@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 
+const _ = require('underscore');
 const firebase = require('firebase');
 
 firebase.initializeApp({
@@ -39,9 +40,11 @@ new Vue({
               ...doc.data(),
               id: doc.id,
             };
-            console.log(data);
+            // console.log(data);
             this.todoLists.push(data);
           });
+          this.todoLists = _.sortBy(this.todoLists, d => d.created_at);
+          this.todoLists = this.todoLists.reverse();
         });
     },
   },
