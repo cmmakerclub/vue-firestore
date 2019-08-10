@@ -6,9 +6,9 @@ const _ = require('underscore');
 const firebase = require('firebase');
 
 firebase.initializeApp({
-  apiKey: 'AIzaSyAqI_GLK8F1Y6Idgtfxx7-PGWLmPljjSi4',
-  authDomain: 'cmmc-dsc1.firebaseapp.com',
-  projectId: 'cmmc-dsc1',
+  apiKey: process.env.VUE_APP_API_KEY,
+  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+  projectId: process.env.VUE_APP_PROJECT_ID,
 });
 
 const db = firebase.firestore();
